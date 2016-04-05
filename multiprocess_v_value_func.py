@@ -1,4 +1,5 @@
 import numpy as np
+import multiprocessing
 import scipy as sp
 import scipy.stats
 import parameters as param
@@ -29,9 +30,7 @@ def v_bellman_objective(values, outputArray, l,w_a,v):
     i = values[0]
     k = values[1]
     
-    objective = lambda s,k: - np.log(k-s) - BETA * v_integral(s,
-                                                              w_a,
-                                                              v)[0]
+    objective = lambda s,k: - np.log(k-s) - BETA * v_integral(s,w_a,v)[0]
     s_star = fminbound(objective, 1e-12, k-1e-12, args=(k,))
     outputArray[i] = -objective(s_star,k)
     
@@ -50,7 +49,7 @@ def v_bellman_op(v):
     return Tv_e
 
 if __name__ == '__main__':
-    v = 5 * log(wealth_axis) - 25
+    v = 76.9230769 * log(wealth_axis) + 3569.764136
     for i in range(N):
         print " >>>> Iteration No. ", i
         v = v_bellman_op(v)
