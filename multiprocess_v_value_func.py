@@ -1,34 +1,35 @@
 import numpy as np
 import scipy as sp
 import scipy.stats
+import parameters as param
 from scipy.integrate import quad
 from scipy.optimize import fminbound
 from numpy import log
 from scipy import interp
-import multiprocessing
 
-SAFE = 1
-BETA = 0.987
-# DISTRIBUTION PARAM
-MEAN = 2
-STDEV = 0.3
-MAX_VAL = 5
+
+SAFE = param.SAFE_R
+BETA = param.BETA
+# DISTRIBUTION PARAM OF THETA (Aggregate shock)
+MEAN = param.AG_MEAN
+STDEV = param.AG_STDE
+MAX_VAL = param.AG_MAXVAL   # Max value of theta for the integration
 # Number of iterations
-N = 200
+N = param.N1
 
 wealth_axis = np.linspace(1e-6,15,10)
 
 def PDF(x):
     return scipy.stats.norm(loc=MEAN,scale=STDEV).pdf(x)
 
-def v_integral(s,MAX,W_ax,Y_ax):
+def v_integral(s,W_ax,Y_ax):
     return quad((lambda theta,sI : interp(sI*max(SAFE,theta),
-                                          W_ax,Y_ax)*PDF(theta)),0,MAX,args=(s,),limit=100)
+                                          W_ax,Y_ax)*PDF(theta)),0,MAX_VAL,args=(s,),limit=100)
 def v_bellman_objective(values, outputArray, l,w_a,v):
     i = values[0]
     k = values[1]
     
-    objective = lambda s,k: - np.log(k-s) - BETA * v_integral(s,MAX_VAL,
+    objective = lambda s,k: - np.log(k-s) - BETA * v_integral(s,
                                                               w_a,
                                                               v)[0]
     s_star = fminbound(objective, 1e-12, k-1e-12, args=(k,))
