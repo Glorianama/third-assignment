@@ -1,6 +1,6 @@
 # These are the parameters of the model
 
-T = 30	# number of periods
+T = 50	# number of periods
 SAFE_R = 1.01 	# return on safe project 1%
 IS_MEAN = 0  	# meean of the idiosyncratic shocks
 IS_STDE = 0.04	# std. error of the distribution of i.s.
@@ -12,7 +12,7 @@ AG_MEAN = 1.03	# aggregate shocks: mean of the distr.
 AG_STDE = 0.0225	# aggr.shocks: std. dev. of the distr.
 AG_MAXVAL = 2	# Maximum value for the integration
 BETA = 0.987	# discount preference
-COST_INT = 1.5	# one-time cost of joining the financial int.
+COST_INT = 1.75	# one-time cost of joining the financial int.
 SAMPLING = 0.1  # sampling rate within the fin. intermediary
 N1 = 2	# Number of iterations - to estimate v(k) - 100
 N2 = 2	# Number of iterations - to estimate w(k) - 125
