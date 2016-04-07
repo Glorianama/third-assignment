@@ -33,8 +33,10 @@ def idiPDF(x):
 
 def w_integral(s,W_ax,Y_ax):
     # max(interp(s*(theta+eps),W_ax,Y_ax),interp(s*(theta+eps)-COST,W_ax,v_func))*aggPDF(theta)*idiPDF(eps)
-    function = lambda theta,eps,s:  theta*eps*s
-    return dblquad(function,MIN_VAL_E,MAX_VAL_E,lambda x: 0, lambda x: MAX_VAL_AG, args=(s,))
+    #function = lambda theta,eps,s:  theta*eps*s
+    #return dblquad(function,MIN_VAL_E,MAX_VAL_E,lambda x: 0, lambda x: MAX_VAL_AG, args=(s,))
+    return quad((lambda theta,sI : interp(sI*max(SAFE,theta),
+                                          W_ax,Y_ax)*PDF(theta)),0,MAX_VAL,args=(s,),limit=100)
 
 def w_bellman_objective(values, outputArray,l,w_a,w):
     i = values[0]
@@ -49,15 +51,17 @@ def w_bellman_op(w):
     Tw_e = multiprocessing.Array('f', Tw)
     wealth_obj = [[item[0],item[1]] for item in enumerate(wealth_axis)]
     l = multiprocessing.Lock()
+    """
     workers = [multiprocessing.Process(target=w_bellman_objective, args=(element,Tw_e,
         l,wealth_axis,w)) for element in enumerate(wealth_obj)]
     for p in workers:
         p.start()
     for p in workers:
         p.join()
+    """
     return Tw_e
 
 w = 10*log(wealth_axis) + 10
 for i in range(N):
     w = w_bellman_op(w)
-np.savetxt('w_value_func.csv',w,delimiter=',')
+# np.savetxt('w_value_func.csv',w,delimiter=',')
