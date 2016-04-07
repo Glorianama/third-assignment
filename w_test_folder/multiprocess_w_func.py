@@ -1,4 +1,5 @@
 import numpy as np
+import multiprocessing
 import scipy as sp
 import scipy.stats
 import parameters as param
@@ -40,26 +41,37 @@ def w_integral(s,W_ax,Y_ax):
 def w_bellman_objective(values,outputArray,l,w_a,w):
     i = values[0]
     k = values[1]
-
+    l.acquire()
+    print "Global ",i,": ",a[i],"."
+    print "Started phase ",i," from ", wealth_axis.size,"."
+    a[i]=a[i]+999
+    print "Global ",i," changed to: ",a[i],"."
+    l.release()
     objective = lambda s,k: -log(k-s)-BETA*w_integral(s,wealth_axis,w)[0]
     s_star = fminbound(objective,1e-12,k-1e-12,args=(k,))
     outputArray[i] = -objective(s_star,k)
+    l.acquire()
+    print "Finished phase ",i," from ", wealth_axis.size,"."
+    l.release()
 
 def w_bellman_op(w):
-    wealth_obj = [[iteam[0],item[1]] for iteam in enumerate(wealth_axis)]
+    wealth_obj = [[item[0],item[1]] for item in enumerate(wealth_axis)]
     Tw_e = multiprocessing.Array('f',np.empty(wealth_axis.size))
     l = multiprocessing.Lock()
-
+    global a 
+    a = [i for i in range(wealth_axis.size)]
     workers=[multiprocessing.Process(target=w_bellman_objective,args=(element,Tw_e,
-        l,wealth_axis,w))]
+        l,wealth_axis,w)) for element in wealth_obj]
     for p in workers:
         p.start()
     for p in workers:
         p.join()
     return Tw_e
 
-w = 10*log(wealth_axis) + 10
-for i in range(N):
-    print i
-    w = w_bellman_op(w)
-np.savetxt('w_value_func.csv',w,delimiter=',')
+if __name__=='__main__':
+    w = 10*log(wealth_axis) + 10
+    for i in range(N):
+        print i
+        w = w_bellman_op(w)
+    np.savetxt('w_value_func.csv',w,delimiter=',')
+    print a
