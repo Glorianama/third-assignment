@@ -1,6 +1,6 @@
 # These are the parameters of the model
 
-T = 50	# number of periods
+T = 30	# number of periods
 SAFE_R = 1.01 	# return on safe project 1%
 IS_MEAN = 0  	# meean of the idiosyncratic shocks
 IS_STDE = 0.04	# std. error of the distribution of i.s.
@@ -14,8 +14,8 @@ AG_MAXVAL = 2	# Maximum value for the integration
 BETA = 0.987	# discount preference
 COST_INT = 1.75	# one-time cost of joining the financial int.
 SAMPLING = 0.1  # sampling rate within the fin. intermediary
-N1 = 2	# Number of iterations - to estimate v(k) - 100
-N2 = 2	# Number of iterations - to estimate w(k) - 125
+N1 = 1	# Number of iterations - to estimate v(k) - 70
+N2 = 1	# Number of iterations - to estimate w(k) - 125
 K_MAX = 15  # Max value where V(K) and W(K) will be mapped. - see the value_func.
 
 
