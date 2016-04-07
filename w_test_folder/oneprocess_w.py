@@ -33,7 +33,8 @@ def idiPDF(x):
 def w_integral(s,W_ax,Y_ax):
     # *aggPDF(theta)*idiPDF(eps)
     # max(interp(s*(theta+eps),W_ax,Y_ax),interp(s*(theta+eps)-COST,W_ax,v_func))
-    function = lambda theta,eps,s: max(interp(s*(theta+eps),W_ax,Y_ax),interp(s*(theta+eps)-COST,W_ax,v_func))*aggPDF(theta)*idiPDF(eps)
+    function = lambda theta,eps,s: max(interp(s*(theta+eps),W_ax,Y_ax), \
+        interp(s*(theta+eps)-COST,W_ax,v_func))*aggPDF(theta)*idiPDF(eps)
     return dblquad(function,MIN_VAL_E,MAX_VAL_E,lambda x: 0, lambda x: MAX_VAL_AG, args=(s,))
 
 def w_bellman_op(w):
