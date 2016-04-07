@@ -16,6 +16,6 @@ COST_INT = 1.75	# one-time cost of joining the financial int.
 SAMPLING = 0.1  # sampling rate within the fin. intermediary
 
 # Number of iterations on the Bellman equations.
-N1 = 1	# Number of iterations - to estimate v(k) - 70
-N2 = 1	# Number of iterations - to estimate w(k) - 125
+N1 = 70	# Number of iterations - to estimate v(k) - 70
+N2 = 70	# Number of iterations - to estimate w(k) - 125
 K_MAX = 15  # Max value where V(K) and W(K) will be mapped. - see the value_func.

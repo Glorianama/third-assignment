@@ -93,7 +93,7 @@ def policy(w):
         the optimal saving decision for each level of wealth/bequest <k>.
     """
     policy_f = np.empty(wealth_axis.size)
-    for i,k = in enumerate(wealth_axis):
+    for i,k in enumerate(wealth_axis):
         objective = lambda s,k: -log(k-s)-BETA*w_integral(s,wealth_axis,w)[0]
         policy_f[i] = fminbound(objective,1e-12,k-1e-12,args=(k,))
     return policy_f
@@ -104,7 +104,7 @@ if __name__=='__main__':
     # We assume log-linear form given the form of v(k).
     w = 60*log(wealth_axis) + 1500
     # To follow how the estimated functional form changes, we log every functional form.
-    time_path [[] for i in range(N)]
+    time_path = [[] for i in range(N)]
     # Iteration on the Bellman equation.
     for i in range(N):
         print ">>>> Iteration No. ", i
