@@ -68,8 +68,11 @@ def w_bellman_objective(values,outputArray,l,w_a,w):
     """
     i = values[0]
     k = values[1]
+    # Here we define the function to be optimized as a function of s and k.
     objective = lambda s,k: -log(k-s)-BETA*w_integral(s,wealth_axis,w)[0]
+    # The optimal saving for a given k and w_.
     s_star = fminbound(objective,0.3*k,k-1e-12,args=(k,))
+    # The new value at k in the iterated value function.
     outputArray[i] = -objective(s_star,k)
 
 def w_bellman_op(w):
@@ -99,6 +102,7 @@ def policy(w):
     policy_f = np.empty(wealth_axis.size)
     for i,k in enumerate(wealth_axis):
         objective = lambda s,k: -log(k-s)-BETA*w_integral(s,wealth_axis,w)[0]
+        # Returning the optimal saving decision for a given k.
         policy_f[i] = fminbound(objective,1e-12,k-1e-12,args=(k,))
     return policy_f
 
