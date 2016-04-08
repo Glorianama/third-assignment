@@ -69,7 +69,7 @@ def w_bellman_objective(values,outputArray,l,w_a,w):
     i = values[0]
     k = values[1]
     objective = lambda s,k: -log(k-s)-BETA*w_integral(s,wealth_axis,w)[0]
-    s_star = fminbound(objective,1e-12,k-1e-12,args=(k,))
+    s_star = fminbound(objective,0.3*k,k-1e-12,args=(k,))
     outputArray[i] = -objective(s_star,k)
 
 def w_bellman_op(w):
