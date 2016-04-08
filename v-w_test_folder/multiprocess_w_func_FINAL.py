@@ -18,6 +18,7 @@ BETA = param.BETA
 AG_MEAN = param.AG_MEAN
 AG_STDEV = param.AG_STDE
 MAX_VAL_AG = param.AG_MAXVAL
+MIN_VAL_AG = param.AG_MINVAL    
 # DISTRIBUTION PARAM (idios. shocks)
 ID_MEAN = param.IS_MEAN
 ID_STDEV = param.IS_STDE
@@ -52,7 +53,7 @@ def w_integral(s,W_ax,Y_ax):
     """
     function = lambda theta,eps,s: max(interp(s*(theta+eps),W_ax,Y_ax), \
         interp(s*(theta+eps)-COST,W_ax,v_func))*aggPDF(theta)*idiPDF(eps)
-    return dblquad(function,MIN_VAL_E,MAX_VAL_E,lambda x: 0, lambda x: MAX_VAL_AG, args=(s,))
+    return dblquad(function,MIN_VAL_E,MAX_VAL_E,lambda x: MIN_VAL_AG, lambda x: MAX_VAL_AG, args=(s,))
 
 def w_bellman_objective(values,outputArray,l,w_a,w):
     """
