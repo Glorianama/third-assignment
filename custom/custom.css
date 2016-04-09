@@ -1,0 +1,12 @@
+
+
+div.text_cell p{
+	text-align: justify;
+	text-justify: auto;
+	font-family: "Palatino Linotype";
+}
+/*
+div#notebook{font-size:14px;line-height:20px;overflow-y:hidden;overflow-x:auto;width:800px;padding-top:20px;margin:0;outline:0;box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;min-height:100%}*/
+.container{
+	width: 900px;
+}
