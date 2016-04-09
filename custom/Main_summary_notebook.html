@@ -112,6 +112,20 @@
 .highlight .vi { color: #19177C } /* Name.Variable.Instance */
 .highlight .il { color: #666666 } /* Literal.Number.Integer.Long */
     </style>
+<style type="text/css">
+    
+
+div.text_cell p{
+	text-align: justify;
+	text-justify: auto;
+	font-family: "Palatino Linotype";
+}
+/*
+div#notebook{font-size:14px;line-height:20px;overflow-y:hidden;overflow-x:auto;width:800px;padding-top:20px;margin:0;outline:0;box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;min-height:100%}*/
+.container{
+	width: 900px;
+}
+    </style>
 
 
 <style type="text/css">
@@ -147,6 +161,11 @@ div#notebook {
 
 <!-- Loading mathjax macro -->
 <!-- Load mathjax -->
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
     <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
     <!-- MathJax configuration -->
     <script type="text/x-mathjax-config">
@@ -192,8 +211,11 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Introduction-+-Theory">Introduction + Theory<a class="anchor-link" href="#Introduction-+-Theory">&#182;</a></h2><p><em>This is your part <strong>Justice!</strong> </em>
-Please mention in this part that although the model can be analytically solved (after a cumbersome work), the path the model produces is still interesting to be verified in a simulational context. Furthermore, this allows further analysis to evaluate more complex changes or policies within the model.</p>
+<h2 id="Introduction-+-Theory">Introduction + Theory<a class="anchor-link" href="#Introduction-+-Theory">&#182;</a></h2><p><strong>We need to complete this part!!!!</strong></p>
+<p>Please mention in this part that although the model can be analytically solved (after a cumbersome work), the path the model produces is still interesting to be verified in a simulational context. Furthermore, this allows further analysis to evaluate more complex changes or policies within the model.</p>
+<p>[...]
+[...]
+[...]</p>
 
 </div>
 </div>
@@ -203,17 +225,17 @@ Please mention in this part that although the model can be analytically solved (
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Estimation-of-the-value-functions---iteration-over-the-Bellman-eqautions">Estimation of the value functions - iteration over the Bellman eqautions<a class="anchor-link" href="#Estimation-of-the-value-functions---iteration-over-the-Bellman-eqautions">&#182;</a></h2><p>This section focuses on how the value functions ($w(k)$,$v(k)$), which are essential in the decision on joining the financial intermediary, are determined. The following Bellman-equations represent the dynamic programmming problems. For an individual outside the financial intermediary, the life-time expected utility is:</p>
+<h2 id="Estimation-of-the-value-functions---iteration-over-the-Bellman-equations">Estimation of the value functions - iteration over the Bellman equations<a class="anchor-link" href="#Estimation-of-the-value-functions---iteration-over-the-Bellman-equations">&#182;</a></h2><p>This section focuses on how the value functions ($w(k)$,$v(k)$), which are essential in the decision on joining the financial intermediary, are determined. The following Bellman-equations represent the dynamic programmming problems. For an individual outside the financial intermediary, the life-time expected utility is:</p>
 \begin{equation}
     W(k) = \max_{0 \leq s \leq k} \left[ ln(k-s) + \beta \int max\left(W[s(\theta+\varepsilon)],V[s(\theta+\varepsilon)-\alpha]\right) dF(\theta) dG(\varepsilon) \right]
 \end{equation}<p>where $V[s(\theta+\varepsilon)-\alpha]$ is the life-time expected utility if the individual joins the intermediary in the next period. For the individual inside the financial intermediary:</p>
 \begin{equation}
     V(k) = \max_{0 \leq s \leq k} \left[ \ln (k-s) + \beta \int max\left(W[s\cdot max(\delta,\theta)],V[s \cdot max(\delta,\theta)]\right) dF(\theta) \right]
 \end{equation}<p>.</p>
-<p>Since $V(k)>W(k)$ for $\forall k \in K$, the secon dynamic programming can be reduced to the following:</p>
+<p>Since $V(k)>W(k)$ for $\forall k \in K$, the second dynamic programming problem can be reduced to the following:</p>
 \begin{equation}
     V(k) = \max_{0 \leq s \leq k} \left[ \ln (k-s) + \beta \int V[s \cdot max(\delta,\theta)] dF(\theta) \right]
-\end{equation}<p>Relying on this equation and the iteration process on the Bellman-equation (implemented in Python by <a href="http://quant-econ.net/py/optgrowth.html">Sargent and Stachursky (2014)</a>), $V(k)$ can be solved. By tailoring the code of <a href="http://quant-econ.net/py/optgrowth.html">Sargent and Stachursky (2014)</a>) to our needs, we have managed to carry out the estimation by ourselves (see the code in the <a href="https://github.com/numeraire92">repository</a> in the file <code>[multiprocess_v_value_fun-FINAL.py]</code>). In order to increase the performance of the code, we relied on multi-processing that allows us to map the iterated value function at different values of $k$ simultaneously.</p>
+\end{equation}<p>Relying on this equation and the iteration process on the Bellman-equation (implemented in Python by <a href="http://quant-econ.net/py/optgrowth.html">Sargent and Stachursky (2014)</a>), $V(k)$ can be solved. By tailoring the code of <a href="http://quant-econ.net/py/optgrowth.html">Sargent and Stachursky (2014)</a>) to our case, we have managed to carry out the estimation by ourselves (see the code in the <a href="https://github.com/numeraire92">repository</a> in the file <code>[multiprocess_v_value_fun-FINAL.py]</code>). In order to increase the performance of the code, we relied on multi-processing that allows us to map the iterated value function at different values of $k$ simultaneously.</p>
 <p>However interestingly, the iteratively estimated function did not converged to the one suggested by the analytical results of the paper (see equation (2) and (3) in <a href="http://piketty.pse.ens.fr/files/GreenwoodJovanovicJPE1990.pdf">Greenwood, Jovanovic (1990)</a>). The analytical form of the value function $V(k)$ and the corresponding policy function are liear :</p>
 \begin{equation}
     V(k_t) = \frac{1}{1-\beta} \ln(1-\beta) + \frac{\beta}{(1-\beta)^2} \ln (\beta)+  \frac{\beta}{(1-\beta)^2} \int \ln max(\delta,\theta)dF(\theta) + \frac{1}{1-\beta} \ln(k_t)
@@ -335,7 +357,7 @@ Please mention in this part that although the model can be analytically solved (
 <span class="c1">#np.savetxt(&#39;wealth_grid.csv&#39;,wealth_axis, delimiter=&quot;,&quot;)</span>
 <span class="n">np</span><span class="o">.</span><span class="n">savetxt</span><span class="p">(</span><span class="s1">&#39;w_value_func.csv&#39;</span><span class="p">,</span><span class="n">w</span><span class="p">,</span><span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="p">)</span>
 <span class="k">print</span> <span class="s2">&quot;Return value function w in &#39;w_value_func.csv&#39;&quot;</span>
-<span class="n">np</span><span class="o">.</span><span class="n">savetext</span><span class="p">(</span><span class="s2">&quot;Return w greedy policy function in &#39;w_policy_func.csv&#39;&quot;</span><span class="p">)</span>
+<span class="n">np</span><span class="o">.</span><span class="n">savetxt</span><span class="p">(</span><span class="s2">&quot;Return w greedy policy function in &#39;w_policy_func.csv&#39;&quot;</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -769,6 +791,7 @@ Please mention in this part that although the model can be analytically solved (
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Parameters-of-the-simulation">Parameters of the simulation<a class="anchor-link" href="#Parameters-of-the-simulation">&#182;</a></h2><p>In order to obtain realistic results, we assumed the following parameters for the model (see the <code>[parameters.py]</code> module). (Parameter sensitivity of the resoulds would be interesting to analyze, but the lengthy estimation of value function $W(k)$ and of the corresponding greedy policy does not allowed us to carry it out in time.)</p>
+<p><strong>These parameters are imported at the beginning of the script.</strong></p>
 
 </div>
 </div>
@@ -813,7 +836,7 @@ Please mention in this part that although the model can be analytically solved (
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Results">Results<a class="anchor-link" href="#Results">&#182;</a></h2><p>In order to get the results, we have to plot the corresponding time paths using the generated data during the simulation. In order to be able to plot these time paths, we rely on a solution provided by Plotly.</p>
+<h2 id="Results---time-paths-of-the-model">Results - time paths of the model<a class="anchor-link" href="#Results---time-paths-of-the-model">&#182;</a></h2><p>In order to get the results, we have to plot the corresponding time paths using the generated data during the simulation. In order to be able to plot these time paths, we rely on a solution provided by Plotly.</p>
 
 </div>
 </div>
@@ -1076,6 +1099,93 @@ Please mention in this part that although the model can be analytically solved (
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="The-development-of-the-financial-intermediary">The development of the financial intermediary<a class="anchor-link" href="#The-development-of-the-financial-intermediary">&#182;</a></h3><p>We also plot the time path of the size of the financial intermediary relative to the population as a measure of the development of the financial intermediary. Since the <code>Intermediary</code> object already has the number of members over time (<code>.number_of_members</code> attribute), we only need to normalize the figures.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span class="n">fin_int_dev</span> <span class="o">=</span> <span class="p">[</span><span class="n">nMember</span><span class="o">/</span><span class="nb">float</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">Ec_agents</span><span class="p">))</span> <span class="k">for</span> <span class="n">nMember</span> <span class="ow">in</span> <span class="n">Inst</span><span class="o">.</span><span class="n">number_of_members</span><span class="p">]</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Then we simply plot this in time.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span class="n">trace_fin_int_dev</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">T</span><span class="p">)],</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">fin_int_dev</span><span class="p">,</span>
+    <span class="n">mode</span> <span class="o">=</span> <span class="s1">&#39;lines+markers&#39;</span><span class="p">,</span>
+    <span class="c1"># name = &#39;Gini index over time&#39;,</span>
+    <span class="n">line</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
+        <span class="n">color</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;rgb(22, 96, 167)&#39;</span><span class="p">),</span>
+        <span class="n">width</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+<span class="n">data_fi_dev</span> <span class="o">=</span> <span class="p">[</span><span class="n">trace_fin_int_dev</span><span class="p">]</span>
+<span class="n">layout_fi_dev</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">title</span> <span class="o">=</span> <span class="s1">&#39;The development of the financial intermediary&#39;</span><span class="p">,</span>
+                     <span class="n">xaxis</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">title</span> <span class="o">=</span> <span class="s1">&#39;Period&#39;</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span>
+                     <span class="n">yaxis</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">title</span> <span class="o">=</span> <span class="s1">&#39;Size relative to the population (%)&#39;</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span>
+                    <span class="p">)</span>
+<span class="n">ply</span><span class="o">.</span><span class="n">iplot</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">data_fi_dev</span><span class="p">,</span> <span class="n">layout</span><span class="o">=</span><span class="n">layout_fi_dev</span><span class="p">))</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_text output_error">
+<pre>
+<span class="ansired">---------------------------------------------------------------------------</span>
+<span class="ansired">NameError</span>                                 Traceback (most recent call last)
+<span class="ansigreen">&lt;ipython-input-1-75de460415e0&gt;</span> in <span class="ansicyan">&lt;module&gt;</span><span class="ansiblue">()</span>
+<span class="ansigreen">----&gt; 1</span><span class="ansiyellow"> trace_fin_int_dev = go.Scatter(
+</span><span class="ansigreen">      2</span>     x <span class="ansiyellow">=</span> <span class="ansiyellow">[</span>i<span class="ansiyellow">+</span><span class="ansicyan">1</span> <span class="ansigreen">for</span> i <span class="ansigreen">in</span> range<span class="ansiyellow">(</span>T<span class="ansiyellow">)</span><span class="ansiyellow">]</span><span class="ansiyellow">,</span><span class="ansiyellow"></span>
+<span class="ansigreen">      3</span>     y <span class="ansiyellow">=</span> fin_int_dev<span class="ansiyellow">,</span><span class="ansiyellow"></span>
+<span class="ansigreen">      4</span>     mode <span class="ansiyellow">=</span> <span class="ansiblue">&apos;lines+markers&apos;</span><span class="ansiyellow">,</span><span class="ansiyellow"></span>
+<span class="ansigreen">      5</span>     <span class="ansired"># name = &apos;Gini index over time&apos;,</span><span class="ansiyellow"></span><span class="ansiyellow"></span>
+
+<span class="ansired">NameError</span>: name &apos;go&apos; is not defined</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Conclusions">Conclusions<a class="anchor-link" href="#Conclusions">&#182;</a></h2><p>Based on these results, we can infer some conclusions for developing countries. If we assume that developing and developed countries differ in their initial wealth and thus their ability to join the financial intermediary in early periods, then by decreasing the cost of access to financial intermediation, it is possible to improve growth in expected term. With financial intermediation and its capability of sampling, the economy can channel its capital to the most productive projects available in each period (safe-risky). This allows the economy to reach the stage of development which is presented in the later stages of the simulations. This means on average higher expected growth rates with lower volatility and stable inequality.</p>
+<p>In case of inequality, the graph suggests an inverse U-curve time path with the Gini-index stabilising at a higher level than initially. If the cost of access to the financial intermediary is lowered, then the early increase in the Gini-index causing in higher stable inequality can be avoided, so not only stable inequality, but a stability at a lower level (compared to the counterfactual) can be established.</p>
+<p>Although it is true that these conclusions can be derived from the analytical solution from the model as well, the implementation of this simulation model allows the analysis of further questions. For example, one of the obvious method lowering the cost of access is the providision of subsidy for households/individuals who can not afford them. But what would be the source of funding of such subsidy? Further expanding the simulation model would allow us to analyse the effect of a progressive tax or a tax on investment icome produced by the financial intermediary. A tax on investment income would reduce the returns from the intermediary thus reducing the life-time expected benefit form the intermediary and could counteract the inteded effect of subsidy, which is the earlier joining to the intermediary.</p>
 
 </div>
 </div>

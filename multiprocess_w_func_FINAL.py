@@ -126,4 +126,4 @@ if __name__=='__main__':
     #np.savetxt('wealth_grid.csv',wealth_axis, delimiter=",")
     np.savetxt('w_value_func.csv',w,delimiter=',')
     print "Return value function w in 'w_value_func.csv'"
-    np.savetext("Return w greedy policy function in 'w_policy_func.csv'")
+    np.savetxt("Return w greedy policy function in 'w_policy_func.csv'")
