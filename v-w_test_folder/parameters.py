@@ -18,5 +18,5 @@ SAMPLING = 0.1  # sampling rate within the fin. intermediary
 
 # Number of iterations on the Bellman equations.
 N1 = 0	# Number of iterations - to estimate v(k) - 70
-N2 = 70	# Number of iterations - to estimate w(k) - 125
+N2 = 25	# Number of iterations - to estimate w(k) - 125
 K_MAX = 15  # Max value where V(K) and W(K) will be mapped. - see the value_func.
