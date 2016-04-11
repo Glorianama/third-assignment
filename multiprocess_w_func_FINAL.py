@@ -28,7 +28,7 @@ MIN_VAL_E = param.IS_MINVAL
 N = param.N2
 COST = param.COST_INT # Cost of joining the fin. interm.
 
-wealth_axis = np.linspace(1e-6,param.K_MAX,2*param.K_MAX) # np.ceil(param.K_MAX*0.75)
+wealth_axis = np.linspace(1e-6,param.K_MAX,2*param.K_MAX) # np.ceil(param.K_MAX*0.75) 
 # We assume the following value function for v(k) based on the original paper
 v_func = 76.9230769* log(wealth_axis) + 3569.764136
 # or if the result from the estimated v(k) is used:
@@ -119,7 +119,7 @@ if __name__=='__main__':
         w = w_bellman_op(w)
         time_path[i] = w
     # Obtain the w* greedy policy function.
-    greedy_policy = policy(v)
+    greedy_policy = policy(w)
 
     # Export the estimated function and the log on the estimeted functions.
     # We assume that the wealth grid is already exported in wealth_grid.csv, otherwise:

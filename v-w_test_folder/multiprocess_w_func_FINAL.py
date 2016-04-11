@@ -119,7 +119,7 @@ if __name__=='__main__':
         w = w_bellman_op(w)
         time_path[i] = w
     # Obtain the w* greedy policy function.
-    greedy_policy = policy(v)
+    greedy_policy = policy(w)
 
     # Export the estimated function and the log on the estimeted functions.
     # We assume that the wealth grid is already exported in wealth_grid.csv, otherwise:
