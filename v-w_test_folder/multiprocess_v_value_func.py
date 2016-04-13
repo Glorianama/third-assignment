@@ -41,6 +41,10 @@ def v_bellman_objective(values, outputArray,l,w_a,v):
         Maximize the value function by the saving rate <s> assuming the value function form
         from the previous iteration. It returns the new new value at <k> in the new
         function form.
+
+        The functional form is represented by the value of the function at each designated
+        <k> and linear interpolation is used to get the value of the function for other
+        <k>-s.
     """
     i = values[0]
     k = values[1]
@@ -52,14 +56,10 @@ def v_bellman_objective(values, outputArray,l,w_a,v):
 
 def v_bellman_op(v):
     """
-        The maximazation task for each worker process at a given wealth stock/bequest<k>.
-        Maximize the value function by the saving rate <s> assuming the value function form
-        from the previous iteration. It returns the new new value at <k> in the new
-        function form.
-
-        The functional form is represented by the value of the function at each designated
-        <k> and linear interpolation is used to get the value of the function for other
-        <k>-s.
+        This function returns the new value function form <Tv_e> at a given iteration stage.
+        It relies on the multiprocessing package that spawns 2*param.K_MAX number of
+        processes to work simultanouosly, thus increasing the process rate somewhat
+        (2*param.K_max = the number of wealth values where the function will be mapped).
     """
     Tv = np.empty(wealth_axis.size)
     wealth_obj = [[item[0],item[1]] for item in enumerate(wealth_axis)]
