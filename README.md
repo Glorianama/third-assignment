@@ -9,13 +9,12 @@ Details of the final assignment can be found
 The ipython notebook containing the assignment in the repository is:
 **Dahal_Nguyen_Huy_Obilor_-[...].ipynb**
 
-[Here is the direct link](https://github.com/numeraire92/third-assignment/blob/master/Dahal_Nguyen_Huy_Obilor_-_Agent_based_modeling_approach_of_the_Greenwood-Jovanovic_model.ipynb)
+[Here is the direct link to the nobteook](https://github.com/numeraire92/third-assignment/blob/master/Dahal_Nguyen_Huy_Obilor_-_Agent_based_modeling_approach_of_the_Greenwood-Jovanovic_model.ipynb)
 
-<<<<<<< HEAD
-** Notebook file requires the following files in the same folder to run: **
-=======
+[Here is a direct link to the html version of the notebook withouth the graphs.](http://numeraire92.github.io/third-assignment/) Including the graphs would prevent mathjax from rendering the equations.
+
+
 **Notebook file requires the following files in the same folder to run:**
->>>>>>> c21e2d1d8f4c9d2464b2b11b64eb2de8a64f0c53
 
 * parameter.py
 * wealth_grid.csv
