@@ -11,7 +11,7 @@ The ipython notebook containing the assignment in the repository is:
 
 [Here is the direct link](https://github.com/numeraire92/third-assignment/blob/master/Dahal_Nguyen_Huy_Obilor_-_Agent_based_modeling_approach_of_the_Greenwood-Jovanovic_model.ipynb)
 
-** Notebook file requires the following files int he same folder to run: **
+** Notebook file requires the following files in the same folder to run: **
 
 * parameter.py
 * wealth_grid.csv
